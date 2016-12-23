@@ -1,0 +1,30 @@
+a{
+    touch-action: none;
+}
+.touch-auto a{
+    touch-action: auto;
+}
+.tabbar-success .active{
+    background-color: #349634;
+}
+.tabbar-label{
+    font-size: 1.5rem;
+    border: 2px solid;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+}
+.item-input .field-label{
+    width:20%;
+}
+.text-truncate {
+    word-wrap: normal; /* for IE */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.loading{
+    text-align: center;
+    padding-top:50%;
+}

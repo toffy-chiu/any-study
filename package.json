@@ -1,0 +1,38 @@
+{
+  "name": "any-study",
+  "version": "1.0.0",
+  "description": "随时随地学习笔记",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack -p",
+    "test": "node ./server.js"
+  },
+  "keywords": [
+    "study",
+    "words",
+    "idiom",
+    "proverb",
+    "english",
+    "react",
+    "spa"
+  ],
+  "author": "toffy",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^3.3.1",
+    "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^2.8.1",
+    "tf-utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.22.0",
+    "react-hot-loader": "^3.0.0-beta.5",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}
