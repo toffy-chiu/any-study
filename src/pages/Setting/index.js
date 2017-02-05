@@ -1,7 +1,7 @@
 var TopBar=require('../../components/TopBar');
 var Icon=require('../../components/Icon');
 var Modal=require('amazeui-touch/lib/Modal');
-
+var ajax=require('tf-utils/lib/ajax');
 var db = require('../../utils/IndexDB');
 
 require('./index.css');
@@ -29,11 +29,9 @@ module.exports=React.createClass({
         function downloadFile(fileName, content){
             var aLink = document.createElement('a');
             var blob = new Blob([content]);
-            var evt = document.createEvent("HTMLEvents");
-            evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错
             aLink.download = fileName;
             aLink.href = URL.createObjectURL(blob);
-            aLink.dispatchEvent(evt);
+            aLink.click();
         }
         //读取数据库
         db.getList(db.TABLE_STUDY, function(list){
@@ -105,10 +103,26 @@ module.exports=React.createClass({
             this.setState({showDialog:false});
         }
     },
+    syncData:function(){
+        var iconSync=document.querySelector('#container .navbar-right svg');
+        iconSync.classList.add('spinning');
+
+        //读取数据库
+        db.getList(db.TABLE_STUDY, function (list) {
+            ajax({
+                type:'post',
+                url:'/api/any-study',
+                data:{content:JSON.stringify(list)},
+                success:function(json){
+                    console.log(json);
+                }
+            });
+        }.bind(this));
+    },
     render:function(){
         return (
             <div className="container container-fill container-column">
-                <TopBar title="设置" leftNav={{}} />
+                <TopBar title="设置" leftNav={{}} rightNav={{icon:'sync', onClick:this.syncData}}/>
                 <div className="views">
                     <div className="view">
                         <div className="container container-fill container-scrollable">

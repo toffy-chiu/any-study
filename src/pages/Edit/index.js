@@ -26,8 +26,6 @@ module.exports=React.createClass({
                     loading:false,
                     data:info
                 });
-                this.refs.desc.innerHTML=info.desc;
-                this.refs.example.innerHTML=info.example||'';
             }.bind(this));
         }else{
             //设置默认值
@@ -54,8 +52,6 @@ module.exports=React.createClass({
         e.preventDefault();
 
         var data=this.state.data;
-        data.desc=this.refs.desc.innerHTML;
-        data.example=this.refs.example.innerHTML;
         if (this.state.isNew) {
             db.add(db.TABLE_STUDY, data);
         } else {
@@ -88,7 +84,7 @@ module.exports=React.createClass({
                                     <div className="item-main">
                                         <label className="field-container">
                                             <span className="field-label">{info.name}：</span>
-                                            <input type="text" name="name" value={this.state.data.name} onChange={this.handleChange} className="field" required/>
+                                            <input type="text" name="name" value={this.state.data.name} onChange={this.handleChange} required/>
                                         </label>
                                     </div>
                                 </li>
@@ -96,7 +92,7 @@ module.exports=React.createClass({
                                     <div className="item-main">
                                         <label className="field-container" style={{alignItems:'flex-start',paddingTop:'0.45rem'}}>
                                             <span className="field-label" style={{minHeight:'5rem'}}>描述：</span>
-                                            <div ref="desc" contentEditable style={{width:'80%',minHeight:120}}></div>
+                                            <textarea className="padding-0" name="desc" value={this.state.data.desc} onChange={this.handleChange}/>
                                         </label>
                                     </div>
                                 </li>
@@ -104,7 +100,7 @@ module.exports=React.createClass({
                                     <div className="item-main">
                                         <label className="field-container" style={{alignItems:'flex-start',paddingTop:'0.45rem'}}>
                                             <span className="field-label" style={{minHeight:'5rem'}}>例句：</span>
-                                            <div ref="example" contentEditable style={{width:'80%',minHeight:120}}></div>
+                                            <textarea className="padding-0" name="example" value={this.state.data.example} onChange={this.handleChange}/>
                                         </label>
                                     </div>
                                 </li>

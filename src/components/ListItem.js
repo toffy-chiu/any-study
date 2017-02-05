@@ -17,7 +17,7 @@ var ListItem = React.createClass({
         var o=this.props.data;
         return (
             <li className="item" onClick={this.handleClick.bind(this, o)}>
-                <h3 className="item-title">{o.name}</h3>
+                <h3 className="item-title">{o.index}. {o.name}</h3>
                 <Link to={`/edit/${o.type}/${o.id}`} style={{lineHeight:0}}>
                     <Icon name="edit" color="#aaa" size="20"/>
                 </Link>

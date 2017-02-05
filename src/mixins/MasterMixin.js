@@ -1,6 +1,7 @@
 var db = require('../utils/IndexDB');
 var observer=require('../utils/observer');
 var pinyin=require('../utils/pinyin');
+var listData={};
 
 module.exports={
     getInitialState:function(){
@@ -12,16 +13,27 @@ module.exports={
     },
     componentWillMount:function(){
         observer.publish('typeChange', this.type);
-        //读取数据库
-        db.getList(db.TABLE_STUDY, function(list){
-            list.sort(function(a, b){
-                return pinyin.getFullChars(a.name).localeCompare(pinyin.getFullChars(b.name));
-            });
+
+        if(listData[this.type]){
             this.setState({
                 loading:false,
-                list:list
+                list:listData[this.type]
             });
-        }.bind(this), db.index_type, db.keyRange.inType(this.type));
+        }else {
+            //读取数据库
+            db.getList(db.TABLE_STUDY, function (list) {
+                list.sort(function (a, b) {
+                    return pinyin.getFullChars(a.name).localeCompare(pinyin.getFullChars(b.name));
+                });
+
+                listData[this.type]=list;
+
+                this.setState({
+                    loading: false,
+                    list: list
+                });
+            }.bind(this), db.index_type, db.keyRange.inType(this.type));
+        }
     },
     /**
      * 点击列表项

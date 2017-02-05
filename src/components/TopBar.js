@@ -25,9 +25,9 @@ var TopBar=React.createClass({
                 {
                     this.props.rightNav?(
                         <div className="navbar-nav navbar-right">
-                            <Link to={this.props.rightNav.href}>
+                            <a href={this.props.rightNav.onClick?'javascript:;':('#'+this.props.rightNav.href)} onClick={this.props.rightNav.onClick}>
                                 <Icon name={this.props.rightNav.icon||'plus'} color="white" style={{marginBottom:-6}}/>
-                            </Link>
+                            </a>
                         </div>
                     ):null
                 }

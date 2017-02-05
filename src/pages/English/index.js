@@ -25,6 +25,7 @@ var English=React.createClass({
                     <ul className="list margin-0">
                         {
                             list.length?list.map(function(o, i){
+                                o.index=i+1;
                                 o.type=this.type;
                                 return <ListItem key={i} data={o} onClick={this.handleClick}/>
                             }.bind(this)):(
